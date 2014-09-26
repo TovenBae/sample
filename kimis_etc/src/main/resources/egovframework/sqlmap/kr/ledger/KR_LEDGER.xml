@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ledger">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ledgerSearchVO" type="com.hifive.ledger.service.LedgerDefaultVO"/>
+
+	<resultMap id="RECP_LEDGER" class="com.hifive.ledger.service.LedgerVO">
+	                                  
+		<result property="snum"     		column="SNUM"/>
+		<result property="draftdate"  		column="DRAFTDATE"/>
+		<result property="draftdeptname"    column="DRAFTDEPTNAME"/>
+		<result property="enforcedate"  	column="ENFORCEDATE"/>
+		<result property="docregno"    		column="DOCREGNO"/>
+		<result property="title"   			column="TITLE"/>
+		<result property="drafterdeptid"  	column="DRAFTERDEPTID"/>
+		<result property="recpman"  		column="RECPMAN"/>
+		<result property="grpno"  			column="GRPNO"/>
+		<result property="orgdrafterid"  	column="ORGDRAFTERID"/>
+		<result property="orgdraftername"   column="ORGDRAFTERNAME"/>
+		<result property="orgdraftdeptid"   column="ORGDRAFTDEPTID"/>
+	</resultMap>
+
+
+ <!-- DOC_RECP_LEDGER START  -->
+ <select id="ledgerDAO.selectRecpList" parameterClass="ledgerSearchVO" resultClass="egovMap">
+	       SELECT A.DRAFTDATE, A.DRAFTDEPTNAME, A.ENFORCEDATE, A.DOCREGNO, A.TITLE, A.DRAFTERDEPTID
+	       		 , A.EXTERNALDOCTYPE  , A.ORGDRAFTERID , A.ORGDRAFTERNAME , A.ORGDRAFTDEPTID, A.ORGDRAFTDEPTNAME
+	       FROM (
+		       SELECT  ROWNUM RNUM, S.*
+			   FROM (
+					SELECT
+					 to_char(DRAFTDATE,'yyyy-mm-dd') as DRAFTDATE, DRAFTDEPTNAME, to_char(ENFORCEDATE,'yyyy-mm-dd') as ENFORCEDATE , DOCREGNO, TITLE, DRAFTERDEPTID
+	       		     , EXTERNALDOCTYPE  , ORGDRAFTERID , ORGDRAFTERNAME , ORGDRAFTDEPTID, ORGDRAFTDEPTNAME
+					FROM approval
+					WHERE 1=1
+				
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						DOCREGNO LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="2">
+						DRAFTDATE BETWEEN #firstDate# AND #secondDate#   
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="3">
+						ENFORCEDATE BETWEEN #firstDate# AND #secondDate#
+					</isEqual>
+					
+					
+				) S
+			 ) A
+		<![CDATA[ WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex# ]]>
+	</select>
+
+ <!-- select id="ledgerDAO.selectRecpList" parameterClass="searchVO" resultClass="egovMap">
+	       SELECT A.SNUM, A.DRAFTDATE, A.DRAFTDEPTNAME, A.ENFORCEDATE, A.DOCREGNO, A.TITLE, A.DRAFTERDEPTID, A.RECPMAN
+	       		 , A.GRPNO , A.ORGDRAFTERID , A.ORGDRAFTERNAME , A.ORGDRAFTDEPTID, A.ORGDRAFTDEPTNAME
+	       FROM (
+		       SELECT  ROWNUM RNUM, S.*
+			   FROM (
+					SELECT
+					 SNUM, to_char(DRAFTDATE,'yyyy-mm-dd') as DRAFTDATE, DRAFTDEPTNAME, to_char(ENFORCEDATE,'yyyy-mm-dd') as ENFORCEDATE , DOCREGNO, TITLE, DRAFTERDEPTID, RECPMAN
+	       		     , GRPNO , ORGDRAFTERID , ORGDRAFTERNAME , ORGDRAFTDEPTID, ORGDRAFTDEPTNAME
+					FROM DOC_RECP_LEDGER
+					WHERE 1=1
+				
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						DOCREGNO LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="2">
+						DRAFTDATE BETWEEN #firstDate# AND #secondDate#   
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="3">
+						ENFORCEDATE BETWEEN #firstDate# AND #secondDate#
+					</isEqual>
+					
+					ORDER BY SNUM DESC
+				) S
+			 ) A
+		<![CDATA[ WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex# ]]>
+	</select -->
+ 
+ 	<select id="ledgerDAO.selectLedgerListTotCnt" parameterClass="ledgerSearchVO" resultClass="int">
+
+			SELECT COUNT(*) totcnt
+			FROM approval
+			WHERE 1=1
+			
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						DOCREGNO LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="2">
+						DRAFTDATE BETWEEN #firstDate# AND #secondDate#   
+					</isEqual>
+					
+					<isEqual prepend="AND" property="searchCondition" compareValue="3">
+						ENFORCEDATE BETWEEN #firstDate# AND #secondDate#
+					</isEqual>
+	</select>
+	
+	
+	<!--  select id="ledgerDAO.selectLedger_item" resultMap="RECP_LEDGER">
+		<![CDATA[
+			SELECT
+				SNUM, RECPDAY, DSPCH, RUNDATE, DOCNUM, TITLE, COTDIV, RECPMAN
+			FROM SAMPLE 
+			WHERE DOCNUM=#id#
+		]]>
+	</select -->
+	
+ <!-- DOC_RECP_LEDGER END    -->
+
+</sqlMap>

@@ -1,0 +1,18 @@
+---------------------------
+웹 페이지 메시지
+---------------------------
+[Error]Invoke URL : 
+
+error
+
+<html><head><title>Apache Tomcat/6.0.37 - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 500 - Servlet.init() for servlet dcAction threw exception</h1><HR size="1" noshade="noshade"><p><b>type</b> Exception report</p><p><b>message</b> <u>Servlet.init() for servlet dcAction threw exception</u></p><p><b>description</b> <u>The server encountered an internal error that prevented it from fulfilling this request.</u></p><p><b>exception</b> <pre>javax.servlet.ServletException: Servlet.init() for servlet dcAction threw exception
+	org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:103)
+	org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:293)
+	org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:861)
+	org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:606)
+	org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:489)
+	java.lang.Thread.run(Thread.java:781)
+</pre></p><p><b>root cause</b> <pre>org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'orgApi': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: protected com.hs.dcs.wfengine.dao.IDManagerDao com.hs.dcs.org.api.OrgApi.idManagerDao; nested exception is org…
+---------------------------
+확인   
+---------------------------

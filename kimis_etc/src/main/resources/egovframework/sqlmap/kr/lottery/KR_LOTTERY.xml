@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Lottery">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="searchVO" type="com.hifive.lottery.service.LotteryDefaultVO"/>
+	<typeAlias  alias="lotteryVO" type="com.hifive.lottery.service.LotteryVO"/>
+
+	<!-- LOTTERY_CONDO_PRIZE  -->
+	<select id="lotteryDAO.selectPrizeListBackup" parameterClass="searchVO" resultClass="egovMap">
+				 SELECT A.PRIZE_ID
+				 	,	A.PRIZE_NAME
+				 	,	A.REGDATE
+				 	,	to_char(to_date(A.PSB_SDATE),'yyyy-mm-dd') PSB_SDATE
+				 	,	to_char(to_date(A.PSB_LDATE),'yyyy-mm-dd') PSB_LDATE
+				 FROM 
+				 (
+						SELECT ROWNUM RNUM, S.* FROM 
+						(
+							SELECT PRIZE_ID
+				 			,PRIZE_NAME
+				 			,REGDATE
+				 			,PSB_SDATE
+				 			,PSB_LDATE
+							FROM LOTTERY_CONDO_PRIZE 
+				 			WHERE 1=1
+				 		) S
+				 )A 
+			<![CDATA[ WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#  ORDER BY REGDATE DESC]]>
+	</select>
+	
+	<select id="lotteryDAO.selectPrizeList" parameterClass="searchVO" resultClass="egovMap">
+		SELECT * FROM (
+				 SELECT A.PRIZE_ID
+                     ,    A.PRIZE_NAME
+                     ,    to_char(to_date(A.REGDATE), 'yyyy-mm-dd') REGDATE
+                     ,    to_char(to_date(A.PSB_SDATE),'yyyy-mm-dd') PSB_SDATE
+                     ,    to_char(to_date(A.PSB_LDATE),'yyyy-mm-dd') PSB_LDATE
+                     ,    USER_ID
+                     ,    DAYCNT
+                     ,    NVL(PRIZECNT,0) PRIZECNT
+                 FROM 
+                 (
+                        SELECT ROWNUM RNUM, S.* FROM 
+                        (
+                            SELECT P.PRIZE_ID
+                             ,P.PRIZE_NAME
+                             ,P.REGDATE
+                             ,P.PSB_SDATE
+                             ,P.PSB_LDATE
+                             ,to_date(P.PSB_LDATE)-to_date(P.PSB_SDATE)+1 daycnt
+                             ,R.USER_ID
+                             ,C.PRIZECNT
+                            FROM LOTTERY_CONDO_PRIZE P, 
+                            	(SELECT USER_ID, PRIZE_ID FROM LOTTERY_CONDO_REQUEST WHERE USER_ID = #userId#) R,
+                                (SELECT PRIZE_ID, NVL(COUNT(USER_ID), 0) PRIZECNT FROM LOTTERY_CONDO_REQUEST
+                                    GROUP BY PRIZE_ID) C 
+                             WHERE P.PRIZE_ID = R.PRIZE_ID(+)
+                                AND P.PRIZE_ID = C.PRIZE_ID(+)
+                         ) S
+                 )A 
+			<![CDATA[ WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex# ) ORDER BY  PRIZE_NAME]]>
+	</select>
+	
+	<select id="lotteryDAO.selectPrizeAdminList" parameterClass="searchVO" resultClass="egovMap">
+			SELECT A.PRIZE_ID
+                     ,    A.PRIZE_NAME
+                     ,    to_char(to_date(A.REGDATE), 'yyyy-mm-dd') REGDATE
+                     ,    to_char(to_date(A.PSB_SDATE),'yyyy-mm-dd') PSB_SDATE
+                     ,    to_char(to_date(A.PSB_LDATE),'yyyy-mm-dd') PSB_LDATE
+                 FROM 
+                 (
+                        SELECT ROWNUM RNUM, S.* FROM 
+                        (
+                            SELECT PRIZE_ID
+                             ,PRIZE_NAME
+                             ,REGDATE
+                             ,PSB_SDATE
+                             ,PSB_LDATE
+                            FROM LOTTERY_CONDO_PRIZE 
+                         ) S
+                 )A 
+			<![CDATA[ WHERE ROWNUM <= #recordCountPerPage# and RNUM > #firstIndex#  ORDER BY REGDATE DESC]]>
+	</select>
+
+	<select id="lotteryDAO.selectPrizeListCount" parameterClass="searchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM LOTTERY_CONDO_PRIZE
+			WHERE 1=1
+	</select>
+	
+	
+	<insert id="lotteryDAO.insertPrize">
+		<![CDATA[
+			insert into LOTTERY_CONDO_PRIZE 
+			( 
+			   	prize_id 
+			  	,prize_name
+			  	,regdate
+			  	,psb_sdate
+			  	,psb_ldate 
+		  	) 
+		  	values 
+			(
+				 'PRZ'||LOTTERY_SEQ.NEXTVAL 
+			  	,#prize_name#
+			  	,sysdate
+			  	,#psb_sdate#
+			  	,#psb_ldate#
+			)
+		]]>
+	</insert>
+
+	<delete id="lotteryDAO.deletetPrize">
+		<![CDATA[
+			delete from LOTTERY_CONDO_PRIZE where prize_id = #prize_id#
+		]]>
+	</delete>
+
+
+	<update id="lotteryDAO.updatePrize">
+		<![CDATA[
+			update LOTTERY_CONDO_PRIZE 
+			set prize_name =  #prize_name#
+			    , psb_sdate = #psb_sdate# 
+			    , psb_ldate = #psb_ldate# 
+			 where  prize_id = #prize_id# 
+		]]>
+	</update>
+	
+	
+	<!--신청 :  유저 콘도 신청 -->
+	<insert id="lotteryDAO.insertReqPrize">
+		<![CDATA[
+			insert into lottery_condo_request 
+			(
+		 		 user_id
+		 		,prize_id
+		 		,reqdate
+		 	)
+		 	values
+		 	(
+		  		 #user_id#
+		 		,#prize_id#
+		 		,sysdate 
+		 	)
+ 		]]>
+	</insert>
+	
+	<!--신청 :  유저별 콘도 신청 카운트 BackUp -->
+	<select id="lotteryDAO.selectReqPrizeListCountbackup" parameterClass="lotteryVO" resultClass="int">
+			SELECT COUNT(*) FROM LOTTERY_CONDO_REQUEST WHERE USER_ID = #user_id#
+	</select>
+	
+	<!--신청 :  유저별 콘도 신청 카운트  -->
+	<select id="lotteryDAO.selectReqPrizeListCount" parameterClass="lotteryVO" resultClass="int">
+			select nvl(sum(to_date(p.psb_ldate)-to_date(p.psb_sdate)+1), 0) datecnt 
+				from lottery_condo_request r, lottery_condo_prize p
+    				where r.prize_id = p.prize_id
+        				and r.user_id = #user_id#
+	</select>
+
+
+	<!--추첨 : 유저별 콘도 랜덤 추출 -->
+	<select id="lotteryDAO.selectReqPrizeRandList" parameterClass="lotteryVO" resultClass="lotteryVO">
+			SELECT A.USER_ID  
+			FROM   LOTTERY_CONDO_REQUEST A , LOTTERY_CONDO_PRIZE B
+			WHERE  A.PRIZE_ID = B.PRIZE_ID
+				   AND B.PRIZE_ID = #prize_id#
+				   ORDER BY DBMS_RANDOM.VALUE
+	</select>
+
+	<!--추첨 :  콘도 상품 ID 전체 추출  -->
+	<select id="lotteryDAO.selectPrizeALLList" parameterClass="lotteryVO" resultClass="lotteryVO">
+			SELECT PRIZE_ID , PRIZE_NAME  FROM LOTTERY_CONDO_PRIZE
+	</select>
+	
+	
+	<!--당첨 : 당첨자 입력 !!  -->
+	<insert id="lotteryDAO.insertWinner">
+		<![CDATA[
+		INSERT INTO LOTTERY_CONDO_WIN
+ 		(
+		   USER_ID
+		  ,PRIZE_ID 
+		  ,REQDATE
+ 		)
+		VALUES 
+		(
+		   #user_id#
+		  ,#prize_id#
+		  ,SYSDATE
+		)
+ 		]]>
+	</insert>
+	
+	<!--당첨 :  당첨자리스트  -->
+	<select id="lotteryDAO.selectPrizeWinResultList" parameterClass="lotteryVO" resultClass="lotteryVO">
+		SELECT	WINNER.PRIZE_ID
+      		, WINNER.PRIZE_NAME
+			,	NVL(WINNER.USER_ID,'당첨자 없음') AS USER_ID
+			,	NVL(USERMASTER.NAME,'당첨자 없음') AS USER_NAME
+		FROM 
+		(
+			SELECT	A.PRIZE_ID
+        	, A.PRIZE_NAME
+			, B.USER_ID 
+			FROM LOTTERY_CONDO_PRIZE A LEFT OUTER JOIN  LOTTERY_CONDO_WIN B ON( A.PRIZE_ID = B.PRIZE_ID )
+		) WINNER LEFT OUTER JOIN  USR_GLOBAL USERMASTER ON	( WINNER.USER_ID = USERMASTER.USER_ID )
+	</select>
+	
+	<!--관리자 : 상품 초기화  -->	
+	<delete id="lotteryDAO.deletPrizeList">
+		delete from lottery_condo_prize
+	</delete>
+	
+	<!--관리자 : 응모자 초기화  -->	
+	<delete id="lotteryDAO.deletCondoRequest">
+		delete from lottery_condo_request
+	</delete>
+	
+	<!--관리자 : 당첨자 초기화  -->	
+	<delete id="lotteryDAO.deleteWinnerList">
+		delete from lottery_condo_win
+	</delete>
+	
+	<delete id="lotteryDAO.deleteUserCancelPrize">
+		delete from lottery_condo_request where user_id = #user_id# and prize_id = #prize_id#
+	</delete>
+	
+</sqlMap>

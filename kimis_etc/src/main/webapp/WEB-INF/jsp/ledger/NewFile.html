@@ -1,0 +1,1197 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+      
+      
+  
+  
+  
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title> </title>
+
+<link rel="stylesheet" type="text/css" href="/bms/css/common/import.css" />
+<link rel="stylesheet" type="text/css" href="/css/gw8/basic80.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/css/gw8/approval.css" media="screen">
+<script type="text/javascript" src="/bms/javascripts/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="/js/CALS.JS"></script>
+<script type="text/javascript" src="/bms/js/calendar.js"></script>
+<script type="text/javascript" src="/bms/js/dui_all.js"></script>
+<script type="text/javascript" src="/bms/js/common/common_all.js"></script>
+<script type="text/javascript" src="/bms/js/validator/validator.js"></script>
+<script type="text/javascript" src="/bms/cz/cb/viw/retrieveWebProps.act"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/viw/common.js"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/viw/commutil.js"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/wrt/hcapi.js"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/viw/appr_common.js"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/viw/docfile_list.js"></script>
+<script type="text/javascript" src="/bms/js/cz/cb/viw/docfile_info_wnd.js"></script>
+<script type="text/javascript" src="/js/org/ORGUTIL.JS"></script>
+<!-- ==== accuzone ==== -->
+<link href="/css/uc/uc.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/uc/accuzone_uc_jQ.js"></script>
+<!-- ==== DirectoryWeb Start ==== -->
+<script type="text/javascript" src="/directory-web/directory/js/jquery.hs.directory/jquery.hs.directory.js"></script>
+<script type="text/javascript">
+var directory; // required - must exist "directory" variable
+var useaccuzoneuc = false;
+var defaultWordType = '7';
+function initDirectory(to, cc, bcc) {
+	if (!$("#uid").val()) {
+		alert("input uid!");
+		return false;
+	}
+	if(useinternaldept) { // 소속기관만 나타나도록 지원  
+		$("#startDept").val('500000202');
+	}
+	if (directory) {
+		to = directory.recInfo.to;
+	}
+	directory = $("#directory").directorypopup({
+		uid:			$("#uid").val(),
+		display:		$("#display").val(),
+		dutiesUsed:		$("#dutiesUsed").val(),
+		checkbox:		$("#checkbox").val(),
+		selectMode:		$("#selectMode").val(),
+		openerType:		$("#openerType").val(),
+		notUseDept:		$("#notUseDept").val(),
+		startDept:		$("#startDept").val()
+	});
+	directory.init(to, cc, bcc);
+	return true;
+}
+</script>
+<!-- ==== DirectoryWeb End ==== -->
+
+
+</head>
+<body onload="fncOnLoad();" class="content_body" style="height:99.5%;">
+	<!--content_box Start-->		
+	<div class="content_box_overnone">	
+		<!--content Start-->	
+		<div id="content">
+			<!--title_area Start-->
+			<div class="title_area">
+	            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                <col></col>
+	                <col width="230px"></col>
+	                <tr>
+	                    <td>
+	                    <h2 class="title"> 
+	                       <span title="">
+                              
+										
+										
+											기안완료함
+										
+										
+										
+										
+										
+							 (8)
+                           </span> 
+                       </h2>
+					   </td>
+	                </tr>
+	            </table>
+	        </div>
+	        <!--title_area End-->
+		
+				<!--srch_area Start-->
+				
+					
+						<div class="srch_area">
+							<!--  detailSearch1 Start -->
+							<div id="detailSearch1">
+								<table summary="문서등록대장조회">
+									<tbody>
+										<tr>
+											<th><label for="basicSj">제목</label>&nbsp;</th>
+											<td>
+												<input id="basicSj" name="basicSj" class="Ltext" onkeydown="if (event.keyCode==13) fncSearch();" type="text" value=""/>&nbsp;&nbsp;&nbsp;
+											</td>
+											<th>
+												<label for="basicReportDe">
+													
+														
+														
+															등록일자
+														
+													
+												</label>&nbsp;
+											</th>
+											<td>
+												
+												
+												<input id="basicReportDe" name="basicReportDe" class="Ltext [{dateFrom:'basicReportDe3'}]" title="날짜시작" type="text" value="" size="10"/> <a href="#a" onclick="dui.Calendar.open('basicReportDe','basicReportDe3','from')"><img src="/img/gw8/calendar.gif" alt="달력" /></a> ~ <input id="basicReportDe3" name="basicReportDe3" class="Ltext [{dateTo:'basicReportDe'}]" title="날짜끝" type="text" value="" size="10"/> <a href="#a" onclick="dui.Calendar.open('basicReportDe3','basicReportDe','to')"><img src="/img/gw8/calendar.gif" alt="달력" /></a>&nbsp;&nbsp;
+											</td>
+											<td>
+												<div class="search">
+													<a href="#a" name="LiteSearch" id="LiteSearch" onclick="javascript:fncSearch()" onfocus="blur();" title='상세검색' class="srch_btn">검색</a>
+													<a href="#a" name="DetailSearch" id="DetailSearch" onclick="javascript:fncPopUpSearch(false);" onfocus="blur();" title='상세검색' class="srch_btn">상세검색</a>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!--  detailSearch1 End -->
+							<div id="detailSearch2" style="display:none;">
+								<!-- 그 밖의 SanctnDetailSearchLedger.jsp 에서 나오는 변수 -->
+							</div>
+						</div>
+		            
+					
+				
+	            <!-- //srch_area End -->
+				<div class="btn_area">	
+					<ul class="btns">
+						<li><span><a href="#a" onclick="fncAddListHide();doCallDocInfo('0.0',0,1,'1,2,3,7,8,9,10');" title="문서정보">문서정보</a></span></li>
+													
+						<li><span><a href="#a" onclick="fncAddListHide();fncAtchDrft();" title="첨부기안">첨부기안</a></span></li> 
+							<li><span><a href="#a" onclick="fncAddListHide();fncCnrs();" title="공람">공람</a></span></li>
+							
+								
+								
+									
+									<li><span><a href="#a" onclick="fncAddListHide();doRefiling('2');" title="편철">편철</a></span></li>
+									<li><span><a href="#a" onclick="fncAddListHide();doCancelFiling('2');" title="편철취소">편철취소</a></span></li>
+																		
+								
+							
+							<li style="display:none;"><span><a href="#a" onclick="fncAddListHide();fncAftfatReport();" title="사후보고">사후보고</a></span></li>
+							
+							
+							<li style="display:none;"><span><a href="#a" onclick="fncAddListHide();fncBkmk(3);" title="내 문서함 등록">내 문서함 등록</a></span></li>
+							<li><span><a href="#a" onclick="addFucView(event)" onmouseover="onMouse(true);" onmouseout="onMouse(false);" title="더보기">더보기 ▼</a></span>
+								<div id="addFucView" class="group_box" style="display:none;width:110px;">
+									<ul class="group_lst no_check">
+										
+										<!-- 문서등록대장의 보안공유 -> 열람제한공유-->
+										<li onclick="fncAddListHide();fncReadngAppn();" title="열람제한공유"><span>열람제한공유</span></li>
+									</ul>
+								</div>
+							</li>
+						
+					</ul>
+					<div class="section_r">
+			            <ul class="lst_option">                 
+			                <li class="horizon">
+			                    
+
+
+
+
+
+
+
+
+
+
+
+<!-- -kdh -->
+<!-- 현재 페이지번호 -->
+
+<!-- 페이지 개수 -->
+
+<!-- 페이지 구분자 -->
+
+<!-- 목록 전체 건수 -->
+
+<!-- 페이지 당 목록 건수 -->
+
+<!-- 목록 건수 셀렉트 박스 표시 여부 -->
+
+<!-- 목록  건수 셀렉트 박스 개체 식별자 -->
+
+<!-- 목록 건수 셀렉트 박스 선택 시 동작 스크립트 함수명 -->
+
+<!-- 목록 건수 셀렉트 박스 내부 옵션 값 목록 -->
+
+<!-- 페이지 번호 클릭 시 작동 스크립트 함수명 -->
+
+<!-- 페이지 번호 넘김 횟수 -->
+
+
+<!--각 10단위 페이지에서 다음페이지네이션이 발생되어 아래와 같은 분기문을 생성함.-->
+
+    
+    
+        <!-- 현재 페이지 시작 매김 번호 -->
+        
+        <!-- 현재 페이지 끝 매김 번호 -->
+        
+    
+
+<!-- 전체 페이지 끝 번호 -->
+
+
+
+<!-- 페이지네이션 Start-->
+	
+        
+            <select id="pageUnit" name="pageUnit" title="페이지당 건수" onchange="fncPageUnitChange()">
+                
+                    <option value="5">5</option>
+                
+                    <option value="10">10</option>
+                
+                    <option value="15">15</option>
+                
+                    <option value="20">20</option>
+                
+                    <option value="30">30</option>
+                
+                    <option value="50">50</option>
+                
+            </select>
+    
+	<!-- 페이지네이션 End-->
+
+			                </li>
+			            </ul>
+			            <ul class="btn_icons">
+			                <li class="btn_divider"></li>
+							<li>
+								
+									
+									
+										<span><img name="gotoPP" id="gotoPP" src="/img/gw8/before_g.gif" border="0" align="absmiddle" title="이전페이지" style="cursor: pointer;"/></span>
+									
+								
+							</li>
+							<li>
+								
+									
+									
+										<span><img name="gotoNP" id="gotoNP" border="0" src="/img/gw8/next_g.gif" align="absmiddle" title="다음페이지" style="cursor: pointer;"/></span>
+									
+								
+							</li>
+			                <li class="btn_divider"></li>
+			                <li>
+			                    <span><img name="printicon" id="printicon" src="/img/gw8/btn_excel.gif" border="0" align="absmiddle" title="엑셀다운로드" style="cursor: pointer;" onclick="fncIseIse('/bms/cz/cb/dbx/retrieveDocRegistRegstrListExcelDwld.act?leftMenu=1','8')"/></span>
+			                </li>               
+			                <li>
+			                    <span><img name="pcsave" id="pcsave" src="/img/gw8/btn_down.gif" border="0" align="absmiddle" title="PC저장" style="cursor: pointer;" onclick="doCallFileManager(HCLTAPP_FILESAVE);"/></span>
+			                </li>               
+			                <li>
+			                    <span><img name="printicon" id="printicon" src="/img/gw8/print.gif" border="0" align="absmiddle" title="인쇄" style="cursor: pointer;" onclick="doCallFileManager(HCLTAPP_PRINT);"/></span>
+			                </li>
+			                
+			                
+							
+			                <li>
+			                    <span><img name="favoriteaddicon" id="favoriteaddicon" src="/img/gw8/favor_add.gif" border="0" align="absmiddle" title="즐겨찾기추가" style="cursor: pointer;" onclick="enrollBookmark()"/></span>
+			                </li>
+							
+							
+							
+							
+			                <li>
+			                    <span><img name="refleshicon" id="refleshicon" src="/img/gw8/btn_reload.gif" border="0" align="absmiddle" title="새로고침" style="cursor: pointer;" onclick="fncRefresh()"/></span>
+			                </li>
+			            </ul>
+			        </div>							
+				</div>
+				<!--layer Bubble Start-->
+				<div id="idAddList" class="layer_bubble" style="display:none;right:0px;top:80px;z-index:99;">
+					<div class="layer_content">
+						<div style="padding:10px 35px 5px 10px">
+							<ul>
+								<li><img style="vertical-align:middle" src="/bms/images/icon/ic_arrow_04.gif" alt="" /> <a href="#a" onclick="fncAtchDrft();fncAddListHide();"><span>첨부기안</span></a></li>
+								<li><img style="vertical-align:middle" src="/bms/images/icon/ic_arrow_04.gif" alt="" /> <a href="#a" onclick="fncAftfatReport();fncAddListHide();"><span>사후보고</span></a></li>
+								<!--<li><img style="vertical-align:middle" src="/bms/images/icon/ic_arrow_04.gif" alt="" /> <a href="#a" onclick="fncPubList();fncAddListHide();"><span>정보공개목록</span></a></li>-->
+								<!--<li><img src="/bms/images/icon/ic_arrow_04.gif" alt="" /> <a href="#a" onclick="fncNoelecList();fncAddListHide();"><span>비전자문서목록</span></a></li> -->
+							</ul>
+						</div>
+						<span class="rt_iefix"></span>
+					</div>
+					<span class="rt">
+					<!-- Do not delete this comment. It's hack for IE6 -->
+					</span>
+					<span class="lb"></span><span class="rb"></span><span class="arrow top center" style="left:75%"></span>
+				</div>
+				<!--//layer Bubble End-->
+				<table id="tbList" summary="문서등록대장목록" class="content_lst">
+					<tbody>
+						<tr>
+							<th class="input_chk" width="33px"><input type="checkbox" class="inchk" id="allCheckBox" name="allCheckBox" onclick="javascript:doSetCheckStatus();" title="전체선택" style="cursor:pointer"/></th>
+							<th class="cen" width="65px">상태 <a href="#a" onclick="viewSttsHelp()"><img src="/bms/images/icon/ic_que.gif" alt='' title="상태아이콘설명" style="padding-bottom:2px;" /></a></th>
+							<th class="cen" width="80px"><a href="#a" onclick="fncSort('ai__REGNO','',document.aform);" id="sort_ai_regno">문서번호</a></th>
+							<th class="cen" width="auto"><a href="#a" onclick="fncSort('ai__TITLE','',document.aform);" id="sort_ai_title">제목</a></th>
+							
+							
+							
+							<th class="cen" width="86px"><a href="#a" onclick="fncSort('ai__DRAFTERNAME','',document.aform);" id="sort_ai_draftername">기안자</a></th>
+							<th class="cen" width="86px"><a href="#a" onclick="fncSort('ai__LASTSIGNERNAME','',document.aform);" id="sort_ai_lastsignername">결재자</a></th>
+							<th class="cen" width="70px"><a href="#a" onclick="fncSort('fm__INDEXDATE','',document.aform);" id="sort_fm_indexdate">등록일자</a></th>
+							<th class="cen" width="86px">수신자</th>
+							
+							
+							
+							
+							
+							<th class="cen" width="55px">처리현황</th>
+						</tr>
+					</tbody>
+					<tbody>
+						
+							
+							
+								
+								<tr data-apprid='JHOMS133230000103000' data-index=0>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="JHOMS133230000103000,256,501000627,7,0,7,0104000004,00000000000000000000,0,0,YNNNN,0,0000000000000000000000000000000000000000000000000,1,0,false,정보시스템실-4,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000151,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/nxxx.gif" alt='' title='' /></span></a></td>
+									<td class="cen"><span title="정보시스템실-4">정보시스템실-4</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="결재테스트" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'JHOMS133230000103000', '0');"
+									
+									
+									>결재테스트</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000627' onclick="showUserInfo(this)">김현수</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000151' onclick="showUserInfo(this)">강일진</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-11-19
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='JHOMS133190000082000' data-index=1>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="JHOMS133190000082000,256,501000627,7,0,7,0104000002,00000000000000000000,0,0,YNNNN,0,0000000000000000000000000000000000000000000000000,1,0,false,정보시스템실-2,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000151,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/nxxx.gif" alt='' title='' /></span></a></td>
+									<td class="cen"><span title="정보시스템실-2">정보시스템실-2</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="기안문테스트" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'JHOMS133190000082000', '1');"
+									
+									
+									>기안문테스트</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000627' onclick="showUserInfo(this)">김현수</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000151' onclick="showUserInfo(this)">강일진</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-11-15
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT133030090676000' data-index=2>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT133030090676000,256,501000112,7,0,6,0063000909,00000000000000000000,0,0,YNNNN,0,00000000000000000000000,1,0,false,관리79-2013-909,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000112,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/noxx.gif" alt='첨부' title='첨부' /></span></a></td>
+									<td class="cen"><span title="관리79-2013-909">관리79-2013-909</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="2013년 9월 금융감독원 전자금융업 업무보고서 제출(3분기)" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT133030090676000', '2');"
+									
+									
+									>2013년 9월 금융감독원 전자금융업 업무보고서 제출(3분기)</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">배성엽</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-10-30
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT133030090673000' data-index=3>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT133030090673000,256,501000112,7,0,6,0063000908,00000000000000000000,0,0,YNNNN,0,00000000000000000000000,1,0,false,관리79-2013-908,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000112,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/noxx.gif" alt='첨부' title='첨부' /></span></a></td>
+									<td class="cen"><span title="관리79-2013-908">관리79-2013-908</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="2013.10 도서자료구입신청" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT133030090673000', '3');"
+									
+									
+									>2013.10 도서자료구입신청</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">배성엽</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-10-30
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT132890089878000' data-index=4>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT132890089878000,256,501000117,7,0,6,0063000872,00000000000000000000,0,0,YNNNN,0,00000000000000000000000,1,0,false,관리72-2013-872,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000117,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/noxx.gif" alt='첨부' title='첨부' /></span></a></td>
+									<td class="cen"><span title="관리72-2013-872">관리72-2013-872</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="2012년도 기업경영분석 전산자료 제공 협조 요청" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT132890089878000', '4');"
+									
+									
+									>2012년도 기업경영분석 전산자료 제공 협조 요청</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000117' onclick="showUserInfo(this)">이동배</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000117' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-10-16
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT132750089262000' data-index=5>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT132750089262000,256,501000110,7,0,6,0063000836,00000000000000000000,0,0,YNNNN,0,00000000000000000000,1,0,false,관리70-2013-836,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000110,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/nxxx.gif" alt='' title='' /></span></a></td>
+									<td class="cen"><span title="관리70-2013-836">관리70-2013-836</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="회사 홈페이지 및 정보사업관련 도메인 사용기간 연장 등록" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT132750089262000', '5');"
+									
+									
+									>회사 홈페이지 및 정보사업관련 도메인 사용기간 연장 등록</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000110' onclick="showUserInfo(this)">박우열</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000110' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-10-02
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT132700088914000' data-index=6>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT132700088914000,256,501000112,7,0,6,0063000828,00000000000000000000,0,0,YNNNN,0,00000000000000000000000,1,0,false,관리79-2013-828,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000112,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/noxx.gif" alt='첨부' title='첨부' /></span></a></td>
+									<td class="cen"><span title="관리79-2013-828">관리79-2013-828</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="2013.9 도서자료구입신청" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT132700088914000', '6');"
+									
+									
+									>2013.9 도서자료구입신청</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">배성엽</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000112' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-09-27
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+								<tr data-apprid='KORAT132680088767000' data-index=7>
+									<td class="input_chk">
+										<input type="checkbox" class="inchk" name="docinfo" id="docinfo" onclick="javascript:setAllCheckStatusByItem(this);" value="KORAT132680088767000,256,501000111,7,0,6,0063000825,00000000000000000000,0,0,YNNNN,0,00000000000000000000000,1,0,false,관리74-2013-825,00000000000000000000,500000401,0,3,1,500000401,0,,0,0,501000111,,00000000000000000000,000000000,00000000000000000000,0"/>
+									</td>
+									<td class="LtextLeft callDocInfo">
+										<div style="display:none"><a href="#a" title="다음에 나오는 이미지를 선택하면 하단에 문서의 상세정보가 나타납니다."></a></div>
+									<a href="#a" class="Lbtn3"><span name="lnkStatus" id="lnkStatus"><img src="/bms/images/cz/cb/viw/status/noxx.gif" alt='첨부' title='첨부' /></span></a></td>
+									<td class="cen"><span title="관리74-2013-825">관리74-2013-825</span></td>
+									<td class="ellipsis callDocInfo" style="text-align:left;" id="sanctitle">
+									
+										
+										
+											
+												
+												
+													
+														<img src="/bms/images/icon/ic_ar_blue_r.gif" alt='' title='발신문서' />
+														
+														
+															
+															
+															
+															
+															
+															
+														
+													
+												
+											
+										
+									
+									<a href="#a" class="ellipsis" title="KIMIS시스템 재구축 관련 외주개발용역 계약 체결 승인 신청" 
+									
+									
+									
+										onclick="doCallClientApp(HCLTAPP_VIEW, 'KORAT132680088767000', '7');"
+									
+									
+									>KIMIS시스템 재구축 관련 외주개발용역 계약 체결 승인 신청</a></td>
+									<td class="cen">
+										<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000111' onclick="showUserInfo(this)">박정운</a>
+									</td>
+									<td class="cen">
+										
+											
+												
+													
+													
+														<a href="#a" onmousedown="saveMousePosition(event)" data-signerid='501000111' onclick="showUserInfo(this)">담당</a>
+													
+												
+											
+											
+										
+									</td>
+									<td class="cen">
+										
+											
+											
+												2013-09-25
+											
+										
+									</td>
+									
+										
+										
+											<td>
+												
+													<span class="ellipsis" title="내부결재">내부결재</span>
+												
+											</td>
+										
+									
+									<td class="cen">
+										
+										
+											
+											
+												종료	
+											
+										
+										
+									</td>
+								</tr>
+								
+							
+						
+					</tbody>
+				</table>
+				<input id="userId" name="userId" type="hidden" value="501000724"/>
+				<input id="deptId" name="deptId" type="hidden" value="500000401"/>
+		      	<input id="pageIndex" name="pageIndex" type="hidden" value="0"/>
+				
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- -kdh -->
+<!-- 현재 페이지번호 -->
+
+<!-- 페이지 개수 -->
+
+
+<!-- 페이지 구분자 -->
+
+<!-- 목록 전체 건수 -->
+
+<!-- 페이지 당 목록 건수 -->
+
+<!-- 목록 건수 셀렉트 박스 표시 여부 -->
+
+<!-- 목록  건수 셀렉트 박스 개체 식별자 -->
+
+<!-- 목록 건수 셀렉트 박스 선택 시 동작 스크립트 함수명 -->
+
+<!-- 목록 건수 셀렉트 박스 내부 옵션 값 목록 -->
+
+<!-- 페이지 번호 클릭 시 작동 스크립트 함수명 -->
+
+<!-- 페이지 번호 넘김 횟수 -->
+
+
+<!--각 10단위 페이지에서 다음페이지네이션이 발생되어 아래와 같은 분기문을 생성함.-->
+
+	
+	
+		<!-- 현재 페이지 시작 매김 번호 -->
+		
+		<!-- 현재 페이지 끝 매김 번호 -->
+		
+	
+
+<!-- 전체 페이지 끝 번호 -->
+
+	
+		
+		
+	
+	
+
+<!-- 10 page 이동 버튼 사용 able / enable-->
+
+
+<!-- 마지막 버튼 able / enable -->
+
+
+
+	<!-- 페이지네이션 Start-->
+	<div class="paginate_area"> 
+		<div class="Paginate" style="left:-50%;margin-bottom:3px;">
+				
+					
+					<span class="num txt">처음</span>
+				
+				
+					
+					<span class="css_arr"><span class="arr_l"></span></span>
+					
+				
+					
+						
+						<span class="num now">1</span>
+						
+						
+					
+				
+				
+					
+					<span class="css_arr"><span class="arr_r"></span></span>
+				
+				
+					
+					<span class="num txt">마지막</span>
+				
+				
+		</div>
+	</div>
+	<!-- 페이지네이션 End-->
+
+				<div id='dvMainBottom' style="display:block; padding-top:10px;">
+					<iframe id='apprInfoWnd' frameborder='0' marginwidth='0' marginheight='0' width='100%' height='0' title="문서정보"></iframe>
+				</div>
+			</form>
+		</div>
+		<!--//content End-->
+	</div>	
+	<!--//content_box End-->
+
+	<!-- ==== DirectoryWeb Start ==== -->
+	<div id="directory"></div> <!-- required - must exist "div" element -->
+	
+	<input type="hidden" id="uid" value="501000724" />
+	<input type="hidden" id="display" value="" />
+	<input type="hidden" id="dutiesUsed" value="" />
+	<input type="hidden" id="checkbox" value="list" />
+	<input type="hidden" id="selectMode" value="1" />
+	<input type="hidden" id="openerType" value="" />
+	<input type="hidden" id="notUseDept" value="000000101" />
+	<input type="hidden" id="startDept" value="" />
+	
+	<input type="hidden" id="message_noneterm" value="검색어를 입력하십시오." />
+	<input type="hidden" id="message_minLength" value="검색은 2글자 이상 입력해야 합니다." />
+	<input type="hidden" id="message_invalidvalue" value="부서명 검색으로 특수문자를 사용할 수 없습니다." />
+	<!-- ==== DirectoryWeb End ==== -->	
+<!-- refreshController -->
+
+
+	<c:if test="true" >
+	<script type="text/javascript" src="/bms/js/refresh.js"></script>
+	</c:if>
+
+
+
+</body>
+<script>
+$(document).ready(function() {
+    $('.callDocInfo').click(function() {
+        var apprid = $(this).parent().attr('data-apprid');
+        var index = $(this).parent().attr('data-index');
+        index = parseInt(index,10);
+        doCallDocInfoWnd(apprid, index, 2,'1,2,3,7,8,9,10');         
+        //alert('index='+index+' apprid='+apprid);
+
+    });
+    info_wnd_init();
+});
+</script>
+</html>

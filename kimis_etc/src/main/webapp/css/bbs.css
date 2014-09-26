@@ -1,0 +1,187 @@
+.mtrl_header_check{width:27px;text-align:center;}
+.mtrl_header_status{width:45px;text-align:center;}
+.mtrl_header_id{width:40px;text-align:center;}
+.mtrl_header_brdname{width:70px;text-align:center;}
+.mtrl_header_title{width:100%;text-align:center;}
+.mtrl_header_dept{width:75px;text-align:center;}
+.mtrl_header_sender{width:70px;text-align:center;}
+.mtrl_header_count{width:50px;text-align:center;}
+.mtrl_header_pdate{width:70px;text-align:center;}
+.mtrl_header_edate{width:70px;text-align:center;}
+/* Length of items for list*/
+.mtrl_item_check{width:27px;text-align:center;}
+.mtrl_item_status{width:45px;text-align:center;}
+.mtrl_item_id{width:45px;text-align:center;}
+.mtrl_item_brdname{width:70px;text-align:center;}
+.mtrl_item_title{width:100%; text-align:left;}
+.mtrl_item_dept{width:75px;text-align:center;}
+.mtrl_item_sender{width:75px;text-align:center;}
+.mtrl_item_count{width:50px;text-align:center;}
+.mtrl_item_pdate{width:70px;text-align:center;}
+.mtrl_item_edate{width:75px;text-align:center;}
+
+.appl_header_check{width:30px;}
+.appl_header_status{width:50px;}
+.appl_header_brdname{width:auto;}
+.appl_header_sender{width:100px;}
+.appl_header_date{width:100px;}
+
+
+
+/* new KIMIS BBS */
+.ledger_bbs_i_no{width:45px;text-align:center;}
+.ledger_bbs_h_no{width:45px;text-align:center;}
+
+.ledger_bbs_i_draftdate{width:60px;text-align:center;}
+.ledger_bbs_h_draftdate{width:60px;text-align:center;}
+
+.ledger_bbs_i_draftdeptname{width:80px;text-align:center;}
+.ledger_bbs_h_draftdeptname{width:80px;text-align:center;}
+
+.ledger_bbs_i_enforcedate{width:60px;text-align:center;}
+.ledger_bbs_h_enforcedate{width:60px;text-align:center;}
+
+.ledger_bbs_i_docregno{width:145px;text-align:center;}
+.ledger_bbs_h_docregno{width:145px;text-align:center;}
+
+.ledger_bbs_i_title{width:200px;text-align:center;}
+.ledger_bbs_h_title{width:200px;text-align:center;}
+
+.ledger_bbs_i_orgdraftdeptname{width:80px;text-align:center;}
+.ledger_bbs_h_orgdraftdeptname{width:80px;text-align:center;}
+
+.ledger_bbs_i_orgdraftername{width:70px;text-align:center;}
+.ledger_bbs_h_orgdraftername{width:70px;text-align:center;}
+
+/* new KIMIS BBS */
+.lottery_bbs_i_no{width:45px;text-align:center;}
+.lottery_bbs_h_no{width:45px;text-align:center;}
+
+.lottery_bbs_i_draftdate{width:60px;text-align:center;}
+.lottery_bbs_h_draftdate{width:60px;text-align:center;}
+
+.lottery_bbs_i_draftdeptname{width:80px;text-align:center;}
+.lottery_bbs_h_draftdeptname{width:80px;text-align:center;}
+
+.lottery_bbs_i_enforcedate{width:60px;text-align:center;}
+.lottery_bbs_h_enforcedate{width:60px;text-align:center;}
+
+.lottery_bbs_i_docregno{width:145px;text-align:center;}
+.lottery_bbs_h_docregno{width:145px;text-align:center;}
+
+.lottery_bbs_i_title{width:200px;text-align:center;}
+.lottery_bbs_h_title{width:200px;text-align:center;}
+
+.lottery_bbs_i_orgdraftdeptname{width:80px;text-align:center;}
+.lottery_bbs_h_orgdraftdeptname{width:80px;text-align:center;}
+
+.lottery_bbs_i_orgdraftername{width:70px;text-align:center;}
+.lottery_bbs_h_orgdraftername{width:70px;text-align:center;}
+
+/* Length of items for list*/
+.appl_item_check{width:30px;}
+.appl_item_status{width:50px;}
+.appl_item_brdname{width:auto;}
+.appl_item_sender{width:100px;}
+.appl_item_date{width:100px;}
+
+.imsi_header_check{width:30px;}
+.imsi_header_status{width:50px;}
+.imsi_header_title{width:auto;}
+.imsi_header_sender{width:100px;}
+.imsi_header_date{width:100px;}
+
+/* Length of items for list*/
+.imsi_item_check{width:30px;}
+.imsi_item_status{width:50px;}
+.imsi_item_title{width:auto;}
+.imsi_item_sender{width:100px;}
+.imsi_item_date{width:100px;}
+
+.vmd{vertical-align:middle; margin-right:2px;}
+.md{margin-right:2px;}
+.zero_right{margin-right:2px;}
+
+/*new icon*/
+.valign_top { vertical-align:top !important; }
+.valign_middle { vertical-align:middle !important; }
+.valign_bottom { vertical-align:bottom !important; }
+.valign_baseline { vertical-align:baseline !important; }
+
+#mtrl_list_panel{
+	top:0px;
+	left:-2000px;
+	border:solid 1px #b4b4b4;
+	width:99.5%;
+	padding-right:10px;
+}
+
+#mtrl_write_panel{
+	margin-left:-19px;
+}
+
+#filter{
+	margin-left:4px;
+}
+
+#BBSSearch {
+	float: right;
+	overflow: hidden;
+	height: 20px;
+	padding: 0 10px;
+	margin-left: 0px;
+	margin-right: 8px;
+	text-align: center;
+	line-height: 20px;
+	color: #fff;
+	border: 1px solid #888;
+	background: url(/img/gw8/bg_btn_add.gif) 5% 10% no-repeat
+}
+
+#bbstreeframe {
+	padding: 0 18px 0 0;
+	border-top-color: #AAA;
+	border-top-width: 1px;
+	border-top-style: solid;
+	height: 100%;
+	text-overflow: ellipsis;
+	border-color: #b3b3b3;
+}
+
+.tdate{
+	height:20px;
+}
+
+.titlebar {
+	font-size: 12px;
+	font-weight: bold;
+	color: #676767;	background-image: url(/img/TITLEBAR_BG.GIF);
+	text-align: center;
+	vertical-align: middle;
+}
+
+.insel{
+	height:22px;
+}
+#SEARCHFORM{
+	margin-left:8px;
+	margin-right:10px;
+}
+.box_table {width:100%; border-collapse:collapse;}
+.box_col01 {text-align:center;	font-weight: bold;background-color: #F9F9F9;}
+.box_col02 {text-align:left;padding-left: 5px;}
+.box_col03 {text-align:center;	font-weight: bold;background-color: #F9F9F9;}
+.box_col04 {text-align:left;}
+.box_col05 {text-align:left;padding-bottom: 5px;}
+.box_view {border-width: 1px;border-style: solid; border-color:#C0C0C; height: 250px;vertical-align: top;padding: 10px;	margin-top: 5px;}
+.box_table tbody td {font-size:12px;color:#666666;vertical-align:middle;padding-left:5px; padding-right:5px; border: 1px solid #d7d7d7;height:24px;}
+.box_table tbody a {font-size:12px !important}
+
+.icon_desc{
+	margin-top:-10px;
+	text-align:right;;
+	margin-right:3px;
+}
+.no_under{
+	border-bottom: 0px;
+}
